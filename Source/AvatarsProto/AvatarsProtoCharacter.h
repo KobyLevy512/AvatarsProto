@@ -11,13 +11,6 @@ class AAvatarsProtoCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
-	/** Camera boom positioning the camera behind the character */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class USpringArmComponent* CameraBoom;
-
-	/** Follow camera */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent* FollowCamera;
 public:
 	AAvatarsProtoCharacter();
 
@@ -28,7 +21,6 @@ public:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
-
 protected:
 
 	/** Called for forwards/backward input */
@@ -40,15 +32,25 @@ protected:
 	void TurnAtRate(float Rate);
 	void LookUpAtRate(float Rate);
 
-protected:
-	// APawn interface
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	// End of APawn interface
-
 public:
-	/** Returns CameraBoom subobject **/
-	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
-	/** Returns FollowCamera subobject **/
-	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+	/* The current health of this player*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player_Stats")
+	float Life;
+
+	/*The amount of kills of this player*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Player_Stats)
+	int Kills;
+
+	/* The current level of this player*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Player_Stats)
+	float Level;
+
+	/* The defence amount of this player*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player_Stats, meta=(ClampMin="1",ClampMax="20"))
+	float Defence;
+
+	/* The attack amount of this player*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player_Stats, meta = (ClampMin = "1", ClampMax = "20"))
+	float Attack;
 };
 
