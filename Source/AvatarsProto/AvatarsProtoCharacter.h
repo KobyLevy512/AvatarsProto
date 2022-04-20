@@ -1,9 +1,8 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Projectile.h"
 #include "AvatarsProtoCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -32,25 +31,42 @@ protected:
 	void TurnAtRate(float Rate);
 	void LookUpAtRate(float Rate);
 
+	// Function that handles firing projectiles.
+	UFUNCTION()
+	void Fire();
+
+	// Gun muzzle offset from the camera location.
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	FVector MuzzleOffset;
+
+	// Projectile class to spawn.
+	UPROPERTY(EditDefaultsOnly, Category = Projectile)
+	TSubclassOf<class AProjectile> ProjectileClass;
+
 public:
 	/* The current health of this player*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player_Stats")
 	float Life;
 
+	/* The current level of this player*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Player_Stats)
+	float Shield;
+
 	/*The amount of kills of this player*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Player_Stats)
 	int Kills;
-
+	
 	/* The current level of this player*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Player_Stats)
 	float Level;
 
 	/* The defence amount of this player*/
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player_Stats, meta=(ClampMin="1",ClampMax="20"))
-	float Defence;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player_Stats, meta=(ClampMin="1",ClampMax="100"))
+	int Defence;
 
 	/* The attack amount of this player*/
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player_Stats, meta = (ClampMin = "1", ClampMax = "20"))
-	float Attack;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player_Stats, meta = (ClampMin = "1", ClampMax = "100"))
+	int Attack;
+
 };
 
