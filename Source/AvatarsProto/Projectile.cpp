@@ -31,6 +31,7 @@ AProjectile::AProjectile()
 			ProjectileMeshComponent->SetStaticMesh(Mesh.Object);
 		}
 	}
+	bReplicates = true;
 }
 
 // Called when the game starts or when spawned
@@ -52,4 +53,5 @@ void AProjectile::FireInDirection(const FVector& ShootDirection)
 {
 	ProjectileMovementComponent->Velocity = ShootDirection * ProjectileMovementComponent->InitialSpeed;
 }
+
 

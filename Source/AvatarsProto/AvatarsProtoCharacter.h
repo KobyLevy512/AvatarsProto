@@ -32,7 +32,7 @@ protected:
 	void LookUpAtRate(float Rate);
 
 	// Function that handles firing projectiles.
-	UFUNCTION()
+	UFUNCTION(Server,Reliable)
 	void Fire();
 
 	// Gun muzzle offset from the camera location.
@@ -44,8 +44,9 @@ protected:
 	TSubclassOf<class AProjectile> ProjectileClass;
 
 public:
+
 	/* The current health of this player*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player_Stats")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Player_Stats)
 	float Life;
 
 	/* The current level of this player*/
@@ -55,10 +56,6 @@ public:
 	/*The amount of kills of this player*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Player_Stats)
 	int Kills;
-	
-	/* The current level of this player*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Player_Stats)
-	float Level;
 
 	/* The defence amount of this player*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player_Stats, meta=(ClampMin="1",ClampMax="100"))

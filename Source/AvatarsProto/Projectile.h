@@ -38,5 +38,6 @@ public:
 	UStaticMeshComponent* ProjectileMeshComponent;
 
 	// Function that initializes the projectile's velocity in the shoot direction.
+	UFUNCTION()
 	void FireInDirection(const FVector& ShootDirection);
 };

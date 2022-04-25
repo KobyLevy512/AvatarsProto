@@ -27,7 +27,6 @@ AAvatarsProtoCharacter::AAvatarsProtoCharacter()
 
 	//Init player stats
 	Life = 1;
-	Level = 1;
 	Defence = 1;
 	Attack = 1;
 	Shield = 0;
@@ -62,7 +61,7 @@ void AAvatarsProtoCharacter::MoveRight(float Value)
 	AddMovementInput(Direction, Value);
 }
 
-void AAvatarsProtoCharacter::Fire()
+void AAvatarsProtoCharacter::Fire_Implementation()
 {
 	// Attempt to fire a projectile.
 	if (ProjectileClass)
